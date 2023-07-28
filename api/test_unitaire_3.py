@@ -16,14 +16,23 @@ def test_api_starting():
     assert response.json() == {"message":"API is up and running"}
 
 
-
-
 def test_bestMoviesBygenre_2():
     url="http://127.0.0.1:8000/bestMoviesByGenre?genre=Adventure"
     basic = HTTPBasicAuth('1644','')
     response = requests.get(url,auth=basic)
     assert response.status_code == 200
     assert response.json() == ["Toy Story (1995) (id = 1)"]
+
+
+
+
+
+
+
+
+
+
+
 
 #def test_bestMoviesBygenre():
     #basic = HTTPBasicCredentials('1644','')
