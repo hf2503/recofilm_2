@@ -24,7 +24,16 @@ def test_bestMoviesBygenre_2():
     assert response.json() == ["Toy Story (1995) (id = 1)"]
 
 
-
+import base64
+credentials = "1644:"
+encoded_credentials = base64.b64encode(credentials.encode()).decode()
+auth_string = f"Basic {encoded_credentials}"
+def test_bestMoviesBygenre_2():
+    response = client.get("/bestMoviesByGenre",
+                          params={"genre": "Adventure"},
+                          headers={"Authorization": "Basic MTY0NDo="})
+    assert response.status_code == 200
+    assert response.json() == ["Toy Story (1995) (id = 1)"]
 
 
 

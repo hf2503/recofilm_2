@@ -42,12 +42,12 @@ class MovieModel:
     def stability(self,df: pd.DataFrame, movie_title: str, num_recommendations: int, title_dict: dict):
         i = 0
         recommendations = []
-        while i <100:
+        while i <10:
             rec = self.predict(df,movie_title,num_recommendations, title_dict)
             recommendations.extend(rec)
             i+=1
         arr, count = np.unique(recommendations, return_counts=True)
-        count = count/100
+        count = count/10
         dict_stability = {k:v for k,v in zip(arr, count)}
         print(dict_stability)
 
