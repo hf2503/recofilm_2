@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+import sys
 from scipy.sparse import csr_matrix
 from sklearn.neighbors import NearestNeighbors
 from joblib import dump, load
@@ -14,10 +15,12 @@ def check_overlap(train_data, test_data):
     # Vérifier si overlap est vide
     if overlap.empty:
         print("Aucune combinaison 'movieId', 'userId' n'est présente dans les deux ensembles.")
+
     else:
         print(
             "Certaines combinaisons 'movieId', 'userId' sont présentes à la fois dans les ensembles de train et de test.")
         print(overlap)
+
 
 def evaluate(self,df: pd.DataFrame, movie_title: str, num_recommendations: int, title_dict: dict):
     recommendations = self.predict(df,movie_title,num_recommendations, title_dict)
