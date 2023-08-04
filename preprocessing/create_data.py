@@ -74,6 +74,10 @@ class Data:
         del gen_tag_df, gen_sco_df
         gc.collect()
 
+        #ajout HFM
+        gen_sco_tag = gen_sco_tag[gen_sco_tag['relevance'] >= self.min_relevance]
+        #fin ajout
+
         number_occ_tag = tag_df.groupby('tag')['movieId'].count().reset_index()
         number_occ_tag.rename(columns={'movieId': 'number of tags'}, inplace=True)
         tag_occ = pd.merge(tag_df, number_occ_tag)
@@ -94,6 +98,10 @@ class Data:
         gc.collect()
 
         gen_sco_tag = gen_sco_tag[gen_sco_tag['relevance'] >= self.min_relevance]
+        #ajout HFM
+        gen_sco_tag = gen_sco_tag.drop_duplicates(subset=['movieId','userId'])
+        #fin ajout HFM
+
 
         number_rating = mov_rat.groupby('title')['rating'].count().reset_index()
         number_rating.rename(columns={'rating':'number of rating'},inplace=True)
@@ -102,6 +110,8 @@ class Data:
         mov_rat.drop(columns=['number of rating'], inplace = True)
 
         df = pd.merge(mov_rat, gen_sco_tag, on=['movieId', 'userId'])
+        #df = pd.merge(mov_rat, gen_sco_tag, on='movieId')
+        df = df.drop_duplicates(subset=['movieId','userId'])
         df.to_csv(self.merged_path, index=False)
         return df
 
