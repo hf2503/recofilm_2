@@ -1,10 +1,14 @@
 import pandas as pd
 import os
+import pickle
 import gc
 import sys
 sys.path.append('..')
 
 from utils.path import data_folder, input_data_folder
+
+#import de unittestfolder
+from utils.path import unittest_folder
 
 
 class Data:
@@ -126,4 +130,13 @@ class Data:
 
         df.to_csv(self.final_path, index=False)
         df[['movieId', 'rating', 'userId', 'genres','title']].drop_duplicates().to_csv(os.path.join(data_folder,f'data_api.csv'), index = False)
+
+        #ajout pour créer et enregistrer les fichiers nécessaires pour les tests unitaires de la bases de donnéeset les github actions 
+        #les fichiers seront enregistrés au format pkl dans le dossier /docker_volume/unittest
+        with open(os.path.join(unittest_folder,'test_data_final.pkl'), 'wb') as f:
+            pickle.dump(df,f)
+        
+        with open(os.path.join(unittest_folder,'test_data_api.pkl'), 'wb') as f:
+            pickle.dump(df[['movieId', 'rating', 'userId', 'genres','title']].drop_duplicates(),f)
+
         return df
