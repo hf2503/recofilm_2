@@ -26,5 +26,5 @@ make_directory(movie_model_unittest_folder)
 user_model_unittest_folder = os.path.join(unittest_folder, "kpi_user_model")
 
 #creation du dossier data_unittest_folder
-data_unittest_folder = os.path.join(unittest_folder, "test_data_folder")
+data_unittest_folder = os.path.join(unittest_folder, "test_data")
 make_directory(data_unittest_folder)
