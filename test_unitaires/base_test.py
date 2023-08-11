@@ -9,30 +9,30 @@ sys.path.insert(0,parent_dir_path)
 from utils.utils import make_directory
 from model_job.model_utils import *
 #from model_job.model.utils import *
-from utils.path import input_data_folder, output_folder
+#from utils.path import input_data_folder, output_folder
 from utils.path import *
 from preprocessing_job.create_data import Data
-print(get_last_final_csv(data_folder))
-print(data_folder)
-print(os.path.dirname(data_folder))
-print(os.path.join((data_folder),'unittest/data_api.pkl'))
+#print(get_last_final_csv(data_folder))
+#print(data_folder)
+#print(os.path.dirname(data_folder))
+#print(os.path.join((data_folder),'unittest/data_api.pkl'))
 
-print(make_directory(unittest_folder))
-print(unittest_folder)
-print(os.path.join(unittest_folder,'test_data_final.pkl'))
+#print(make_directory(unittest_folder))
+#print(unittest_folder)
+#print(os.path.join(unittest_folder,'test_data_final.pkl'))
 
 def get_data_final_pkl():
-    file_path = os.path.join(unittest_folder,'test_data_final.pkl')
+    file_path = os.path.join(data_unittest_folder,'test_data_final.pkl')
     with open(file_path,'rb') as df:
         return pickle.load(df)
+
+print(unittest_folder)
+print(data_unittest_folder)
 
 def get_data_api_pkl():
-    file_path = os.path.join(unittest_folder,'test_data_api.pkl')
+    file_path = os.path.join(data_unittest_folder,'test_api_data.pkl')
     with open(file_path,'rb') as df:
         return pickle.load(df)
-
-
-print(get_data_api_pkl())
 
 
 def get_last_final_pkl(data_folder):
@@ -45,14 +45,15 @@ def get_last_final_pkl(data_folder):
     return os.path.join(data_folder, last_final_pkl)
 
 print(get_last_final_pkl(unittest_folder))
-
+print(os.path.exists(unittest_folder))
 
 def test_existence_final_pkl():
-    assert get_last_final_pkl(unittest_folder) != None
+    """check if the test_data_final exists"""
+    assert get_last_final_pkl(data_unittest_folder) != None
 
 def test_existence_data_api_pkl():
-    """check if the file data_api.csv exist"""
-    csv_files = [file for file in os.listdir(unittest_folder) if file.startswith("test") and file.endswith(".pkl")]
+    """check if the file data_api.pkl exists"""
+    csv_files = [file for file in os.listdir(data_unittest_folder) if file.startswith("test") and file.endswith(".pkl")]
     assert len(csv_files) == 2
 
 def test_shape_final_csv():

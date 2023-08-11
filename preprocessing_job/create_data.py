@@ -5,7 +5,7 @@ import gc
 import sys
 sys.path.append('..')
 
-from utils.path import data_folder, input_data_folder
+from utils.path import data_folder, input_data_folder,data_unittest_folder
 
 #import de unittestfolder
 from utils.path import unittest_folder
@@ -133,10 +133,20 @@ class Data:
 
         #ajout pour créer et enregistrer les fichiers nécessaires pour les tests unitaires de la bases de donnéeset les github actions 
         #les fichiers seront enregistrés au format pkl dans le dossier /docker_volume/unittest
-        with open(os.path.join(unittest_folder,'test_data_final.pkl'), 'wb') as f:
-            pickle.dump(df,f)
         
-        with open(os.path.join(unittest_folder,'test_data_api.pkl'), 'wb') as f:
-            pickle.dump(df[['movieId', 'rating', 'userId', 'genres','title']].drop_duplicates(),f)
+        #with open(os.path.join(unittest_folder,'test_data_final.pkl'), 'wb') as f:
+            #pickle.dump(df,f)
+        
+        #with open(os.path.join(unittest_folder,'test_data_api.pkl'), 'wb') as f:
+            #pickle.dump(df[['movieId', 'rating', 'userId', 'genres','title']].drop_duplicates(),f)
+
+        with open(os.path.join(data_unittest_folder,'test_data_final.pkl'), 'wb') as f:
+            pickle.dump(df.head(20),f)
+
+        with open(os.path.join(data_unittest_folder,'test_api_data.pkl'), 'wb') as f:
+            pickle.dump(df[['movieId', 'rating', 'userId', 'genres','title']].drop_duplicates().head(20),f)
+
+
+        #fin ajout
 
         return df

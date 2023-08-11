@@ -8,4 +8,4 @@ from create_data import Data
 
 
 get_all_csv_information()
-df = Data(min_relevance=0.99,min_tags=5000).data
+df = Data(min_relevance=0.9).data
