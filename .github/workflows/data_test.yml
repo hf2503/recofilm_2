@@ -1,6 +1,9 @@
 name: Run test_data
-on: [push]
-
+on :
+    push:
+        paths:
+          - 'docker_volume/unittest/test_data/test_api_data.pkl'
+          - 'docker_volume/unittest/test_data/test_data_final.pkl'
 jobs:
   build:
     runs-on: ubuntu-latest
