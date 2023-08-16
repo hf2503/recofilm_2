@@ -11,6 +11,10 @@ from api.api import app
 from fastapi.security import HTTPBasic, HTTPBasicCredentials
 from requests.auth import HTTPBasicAuth
 import time
+#from api_utils.utils import *
+
+
+data, movie_data, user_data, title_dict = get_data()
 
 client = TestClient(app)
 
@@ -18,10 +22,10 @@ def test_api_starting():
     """check if the API is running."""
     url = 'http://localhost:8000'
     response = requests.get(url)
-    
+
     assert response.status_code == 200
     assert response.json() == {"message": "API is up and running"}
 
-
+print(data)
 
 
