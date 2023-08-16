@@ -1,8 +1,8 @@
 name: Run api_test
 on :
-    push:
-        paths:
-          - docker_volume\data\data_api.csv
+  [push]
+        #paths:
+          #- docker_volume\data\data_api.csv
 jobs:
   build:
     runs-on: ubuntu-latest
