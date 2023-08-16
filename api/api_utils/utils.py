@@ -9,7 +9,7 @@ from pydantic import BaseModel
 from typing import List, Optional, Annotated
 from scipy.sparse import csr_matrix
 from utils.path import data_folder, output_folder, input_data_folder
-
+import pickle
 
 DATA_PATH = os.path.join(data_folder,'data_api.csv')
 MIN_N_RATINGS_NEW_USER = 3
@@ -28,7 +28,8 @@ def get_data(data_path=DATA_PATH):
         tuple: A tuple containing the movie ratings data DataFrame, movie data sparse CSR matrix,
                user data sparse CSR matrix, and a dictionary mapping movie titles to IDs.
     """
-    data = pd.read_csv(data_path)
+
+    data = pickle.load(r'C:\Users\Windows\OneDrive\ProjetMlops\ml-20m\recofim_hf\GitHub\recofilm_2\docker_volume\unittest\test_data\test_api_data.pkl')
     df = data[['movieId', 'rating', 'userId']].drop_duplicates()
     rating_matrix = df.pivot(index='movieId', columns='userId', values='rating').fillna(0)
     movie_data = csr_matrix(rating_matrix.values)
