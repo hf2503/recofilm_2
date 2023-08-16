@@ -2,7 +2,7 @@ name: Run api_test
 on :
     push:
         paths:
-          - docker_volume\outputs\predictions_history.json
+          - docker_volume\data\data_api.csv
 jobs:
   build:
     runs-on: ubuntu-latest
