@@ -21,6 +21,8 @@ def test_api_starting():
     assert response.status_code == 200
     assert response.json() == {"message": "API is up and running"}
 
+    
+
 def test_api_unique_genre():
     """check if the list of unique movies genres is not empty"""
     url = 'http://127.0.0.1:8000/unique_genres'
