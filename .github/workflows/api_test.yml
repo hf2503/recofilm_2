@@ -24,6 +24,7 @@ jobs:
         pip install pytest
         pip install joblib
         pip install pandas
+        pip install scipy
         sleep 60 
 
     - name: Run api_test
