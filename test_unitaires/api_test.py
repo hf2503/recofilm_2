@@ -18,6 +18,7 @@ def test_api_starting():
     """check if the API is running."""
     url = 'http://localhost:8000'
     response = requests.get(url)
+    
     assert response.status_code == 200
     assert response.json() == {"message": "API is up and running"}
 
