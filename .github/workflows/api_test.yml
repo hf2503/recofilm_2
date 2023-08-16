@@ -2,8 +2,7 @@ name: Run api_test
 on :
     push:
         paths:
-          - 'docker_volume/unittest/test_data/test_api_data.pkl'
-          - 'docker_volume/unittest/test_data/test_data_final.pkl'
+          - docker_volume\outputs\predictions_history.json
 jobs:
   build:
     runs-on: ubuntu-latest
