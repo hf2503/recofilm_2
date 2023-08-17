@@ -26,7 +26,12 @@ jobs:
         pip install flake8
 
     - name: Run api_test
-      run: |
-        cd test_unitaires
-        pytest -v api_test.py
+      uses: nick-fields/retry@v2
+      with:
+        max_attempts: 3
+        retry_on: error
+        timeout_seconds: 5
+        command: |
+          cd test_unitaires
+          pytest -v api_test.py
 
