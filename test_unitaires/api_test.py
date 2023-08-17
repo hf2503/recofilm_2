@@ -16,7 +16,7 @@ import time
 
 #data, movie_data, user_data, title_dict = get_data()
 
-#client = TestClient(app)
+#client = TestClient(app) compliqué
 
 def test_api_starting():
     """check if the API is running."""
