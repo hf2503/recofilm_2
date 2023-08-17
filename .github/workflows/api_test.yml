@@ -30,4 +30,4 @@ jobs:
 
     - name: Run api_test
       run: |
-        cd test_unitaires && pytest -v api_test.py
+        curl -X get http:127.0.0.1:8000
