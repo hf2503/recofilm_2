@@ -1,4 +1,4 @@
-****** Information for File: C:\Users\Windows\OneDrive\ProjetMlops\ml-20m\recofim_hf\GitHub\recofilm_2\docker_volume\inputs\genome-scores.csv ******
+****** Information for File: /code/preprocessing_job/docker_volume/inputs/genome-scores.csv ******
 ****** Stat desc ******
             movieId         tagId     relevance
 count  1.170977e+07  1.170977e+07  1.170977e+07
@@ -29,7 +29,7 @@ movieId      10381
 tagId         1128
 relevance     4000
 dtype: int64
-****** Information for File: C:\Users\Windows\OneDrive\ProjetMlops\ml-20m\recofim_hf\GitHub\recofilm_2\docker_volume\inputs\genome-tags.csv ******
+****** Information for File: /code/preprocessing_job/docker_volume/inputs/genome-tags.csv ******
 ****** Stat desc ******
              tagId
 count  1128.000000
@@ -55,7 +55,7 @@ dtype: float64
 tagId    1128
 tag      1128
 dtype: int64
-****** Information for File: C:\Users\Windows\OneDrive\ProjetMlops\ml-20m\recofim_hf\GitHub\recofilm_2\docker_volume\inputs\links.csv ******
+****** Information for File: /code/preprocessing_job/docker_volume/inputs/links.csv ******
 ****** Stat desc ******
              movieId        imdbId         tmdbId
 count   27278.000000  2.727800e+04   27026.000000
@@ -86,7 +86,7 @@ movieId    27278
 imdbId     27278
 tmdbId     27008
 dtype: int64
-****** Information for File: C:\Users\Windows\OneDrive\ProjetMlops\ml-20m\recofim_hf\GitHub\recofilm_2\docker_volume\inputs\movies.csv ******
+****** Information for File: /code/preprocessing_job/docker_volume/inputs/movies.csv ******
 ****** Stat desc ******
              movieId
 count   27278.000000
@@ -115,7 +115,7 @@ movieId    27278
 title      27262
 genres      1342
 dtype: int64
-****** Information for File: C:\Users\Windows\OneDrive\ProjetMlops\ml-20m\recofim_hf\GitHub\recofilm_2\docker_volume\inputs\ratings.csv ******
+****** Information for File: /code/preprocessing_job/docker_volume/inputs/ratings.csv ******
 ****** Stat desc ******
              userId       movieId        rating     timestamp
 count  2.000026e+07  2.000026e+07  2.000026e+07  2.000026e+07
@@ -150,7 +150,7 @@ movieId         26744
 rating             10
 timestamp    15351121
 dtype: int64
-****** Information for File: C:\Users\Windows\OneDrive\ProjetMlops\ml-20m\recofim_hf\GitHub\recofilm_2\docker_volume\inputs\tags.csv ******
+****** Information for File: /code/preprocessing_job/docker_volume/inputs/tags.csv ******
 ****** Stat desc ******
               userId        movieId     timestamp
 count  465564.000000  465564.000000  4.655640e+05
