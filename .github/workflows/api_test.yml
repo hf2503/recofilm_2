@@ -31,5 +31,5 @@ jobs:
     - name: Run api_test
       run: |
 
-        curl -X get http://172.30.192.1
+        cd test_unitaires && pytest -v api_test.py
 

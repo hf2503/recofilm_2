@@ -22,7 +22,7 @@ import time
 
 def test_api_starting():
     """check if the API is running."""
-    url = 'http://localhost:8000'
+    url = 'http://172.30.192.1'
     response = requests.get(url)
 
     assert response.status_code == 200
