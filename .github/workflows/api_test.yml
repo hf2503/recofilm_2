@@ -31,5 +31,5 @@ jobs:
     - name: Run api_test
       run: |
 
-        curl -X get http:127.0.0.1:8000/
+        curl -X get http://127.0.0.1:8000/
 
