@@ -33,5 +33,6 @@ jobs:
         timeout_seconds: 5
         command: |
           cd test_unitaires
-          pytest -v api_test.py
+          pytest -v api_test.py >> log_pytest.txt
+          
 
