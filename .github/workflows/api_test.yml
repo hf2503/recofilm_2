@@ -31,5 +31,5 @@ jobs:
     - name: Run api_test
       run: |
 
-        curl -X get http://192.168.0.3:8000
+        curl -X get http://172.30.192.1
 
