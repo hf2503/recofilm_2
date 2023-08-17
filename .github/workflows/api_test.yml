@@ -24,10 +24,7 @@ jobs:
         pip install httpx
         pip install fastapi
         pip install pytest
-        pip install joblib
-        pip install pandas
-        pip install scipy
-
+        
     - name: Run api_test
       run: |
         cd test_unitaires
