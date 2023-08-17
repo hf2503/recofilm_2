@@ -18,7 +18,7 @@ import time
 
 #client = TestClient(app) compliqué
 
-client = TestClient(app)
+#client = TestClient(app)
 
 def test_api_starting():
     """Test if the API is running."""
