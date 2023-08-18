@@ -1,16 +1,15 @@
 name: Run api_test
 on :
   [push]
-        #paths:
-          #- docker_volume\data\data_api.csv
+      #paths:
+        #- 'docker_volume/unittest/kpi_movie_model/dict_prediction_comparaison.pkl'
+        #- 'docker_volume/unittest/kpi_movie_model/dict_stability.pkl'
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v3
-    - name: Setup .NET Core
-      uses: actions/setup-dotnet@v3
 
     - name: Set up Python 3.9
       uses: actions/setup-python@v3
@@ -19,23 +18,16 @@ jobs:
 
     - name: Install dependencies
       run: |
-        pip install pytest
+        python -m pip install --upgrade pip
         pip install requests
         pip install httpx
         pip install fastapi
-        pip install flake8
-
+        pip install pytest
+        pip install pandas
+        pip install joblib
+        pip install scipy
     - name: Run api_test
-      uses: nick-fields/retry@v2
-      with:
-        max_attempts: 3
-        retry_on: error
-        timeout_seconds: 5
-        command: |
-          cd api
-          py -m uvicorn api:app --reload
-          cd ..
-          cd test_unitaires
-          pytest -v api_test.py >> log_pytest.txt
-          
+      run: |
+        
+        cd test_unitaires && pytest -v api_test.py
 
