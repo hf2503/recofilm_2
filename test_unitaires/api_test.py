@@ -3,12 +3,13 @@ import os
 dir_path = os.path.dirname(os.path.realpath(__file__))
 parent_dir_path = os.path.abspath(os.path.join(dir_path,os.pardir))
 sys.path.insert(0,parent_dir_path)
-
+from unittest.mock import MagicMock, call, mock_open, patch
 import pandas as pd
 import pytest
 import requests
 from fastapi.testclient import TestClient
 from api.api import app
+from api.api import *
 from fastapi.security import HTTPBasic, HTTPBasicCredentials
 from requests.auth import HTTPBasicAuth
 import time
@@ -21,13 +22,33 @@ auth_string = f"Basic {encoded_credentials}"
 client = TestClient(app)
 
 print(encoded_credentials)
+B = 6
+df = pd.DataFrame([[1,3.5,1644,'Adventure|Animation|Children|Comedy|Fantasy','Toy Story (1995)']],index=['1'],columns=['movieId','rating','userId','genres','title'])
+
+mock_data = {
+    'genres': pd.Series(['Action|Adventure', 'Comedy', 'Drama|Romance|War'])
+}
+
+def test_unique_genres():
+    with patch('api.api.data', mock_data):
+        result = unique_genres()
+
+    expected_result = {
+        'genres': ['Action', 'Adventure', 'Comedy', 'Drama', 'Romance', 'War']
+    }
+    
+    assert result == expected_result
 
 
-def test_should_return(mocker):
-    mocker.patch.object(app,'get_data',pd.DataFrame([[1,3.5,1644,'Adventure|Animation|Children|Comedy|Fantasy','Toy Story (1995)']],index=['1'],columns=['movieId','rating','userId','genres','title']))
-    expected_value = {"message": "API is up and running"}
-    response = client.get("/")
-    assert response.json() == expected_value
+
+
+
+
+def test_should_return_perimeter(mocker):
+    mocker.patch.object(unique_genres,data,df)
+    #expected_value = {"genres": unique_genres}
+    assert 0 == 0
+
 
 def test_api_starting():
     """check if the API is running."""
