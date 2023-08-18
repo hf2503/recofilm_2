@@ -32,6 +32,10 @@ jobs:
         retry_on: error
         timeout_seconds: 5
         command: |
+          cd api
+          py -m uvicorn api:app --reload
+          cd ..
           cd test_unitaires
-          pytest -v api_test.py
+          pytest -v api_test.py >> log_pytest.txt
+          
 
