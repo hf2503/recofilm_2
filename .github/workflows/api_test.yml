@@ -23,6 +23,7 @@ jobs:
         pip install httpx
         pip install fastapi
         pip install pytest
+        pip install pandas
     - name: Run api_test
       run: |
         
