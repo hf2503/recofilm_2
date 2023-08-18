@@ -25,6 +25,7 @@ jobs:
         pip install pytest
         pip install pandas
         pip install joblib
+        pip install scipy
     - name: Run api_test
       run: |
         
