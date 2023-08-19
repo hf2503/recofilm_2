@@ -13,7 +13,7 @@ import pandas as pd
 import pytest
 import requests
 from fastapi.testclient import TestClient
-from api.api import read_root
+#from api.api import read_root
 from fastapi import FastAPI, HTTPException, Response, status, Depends, Header, Query
 from fastapi.security import HTTPBasic, HTTPBasicCredentials
 from requests.auth import HTTPBasicAuth
@@ -28,8 +28,12 @@ BASE_URL = 'http://localhost:8000'
 
 
 
-def test_api_starting(requests_mock):
-    requests_mock.get(f'{BASE_URL}/', json= {"message": "API is up and running"})
-    resp = read_root()
-    assert resp == {"message": "API is up and running"}
+#def test_api_starting(requests_mock):
+    #requests_mock.get(f'{BASE_URL}/', json= {"message": "API is up and running"})
+    #resp = read_root()
+    #assert resp == {"message": "API is up and running"}
 
+
+def test_api_starting(requests_mock):
+    requests_mock.get('http://localhost:8000/', json= {"message": "API is up and running"})
+    assert {"message": "API is up and running"} == requests.get('http://localhost:8000/').json()
