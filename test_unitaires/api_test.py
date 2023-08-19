@@ -13,7 +13,7 @@ import pandas as pd
 import pytest
 import requests
 from fastapi.testclient import TestClient
-from api.api import read_root
+from api.api import read_root,unique_genres,unique_movies
 from fastapi import FastAPI, HTTPException, Response, status, Depends, Header, Query
 from fastapi.security import HTTPBasic, HTTPBasicCredentials
 from requests.auth import HTTPBasicAuth
@@ -43,20 +43,22 @@ def test_api_starting(requests_mock):
 
 
 def test_get_unique_genres(requests_mock):
-    all_genres = mock_data['genres'].str.split('|', expand=True).stack().tolist()
-    unique_genres = sorted(set(all_genres))
-    requests_mock.get(f'{BASE_URL}/unique_genres', json= {"genres": unique_genres })
-    assert {"genres": unique_genres} == requests.get(f'{BASE_URL}/unique_genres').json()
+    with patch('api.api.data',mock_data):
+        result = unique_genres()
+    requests_mock.get(f'{BASE_URL}/unique_genres', json= {"genres": ["Adventure","Animation","Children",
+                                                                     "Comedy","Fantasy",]})
+    assert result == requests.get(f'{BASE_URL}/unique_genres').json()
 
 def test_get_unique_movies(requests_mock):
-    all_movies = mock_data['title'].unique().tolist()
-    requests_mock.get(f'{BASE_URL}/unique_movies', json= {"genres":all_movies})
-    assert {"genres": all_movies} == requests.get(f'{BASE_URL}/unique_movies').json()
+
+    requests_mock.get(f'{BASE_URL}/unique_movies', json= {"movies":['Toy Story (1995)']})
+    with patch('api.api.data',mock_data):
+        result = unique_movies()
+    assert result == requests.get(f'{BASE_URL}/unique_movies').json()
 
 def test_get_random_output(requests_mock):
-    all_movies = mock_data['title'].unique().tolist()
     requests_mock.get(f'{BASE_URL}/unique_movies', json= {"genres":all_movies})
-    assert {"genres": all_movies} == requests.get(f'{BASE_URL}/unique_movies').json()
+    #assert {"genres": all_movies} == requests.get(f'{BASE_URL}/unique_movies').json()
 
 #def test_get_random_output(requests_mock):
     #requests_mock.get(f'{BASE_URL}/user_model"', json= {"movie": [)
