@@ -8,8 +8,6 @@ sys.path.insert(0,'../api')
 #fin ajout
 
 
-
-
 from fastapi.security import HTTPBasic, HTTPBasicCredentials
 from fastapi import FastAPI, HTTPException, Response, status, Depends, Header, Query
 import json

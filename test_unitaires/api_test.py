@@ -13,7 +13,7 @@ import pandas as pd
 import pytest
 import requests
 from fastapi.testclient import TestClient
-#from api.api import read_root
+from api.api import read_root
 from fastapi import FastAPI, HTTPException, Response, status, Depends, Header, Query
 from fastapi.security import HTTPBasic, HTTPBasicCredentials
 from requests.auth import HTTPBasicAuth
@@ -39,7 +39,7 @@ mock_data = pd.DataFrame([[1,3.5,1644,
 
 def test_api_starting(requests_mock):
     requests_mock.get(f'{BASE_URL}/', json= {"message": "API is up and running"})
-    assert {"message": "API is up and running"} == requests.get(f'{BASE_URL}/').json()
+    assert read_root() == requests.get(f'{BASE_URL}/').json()
 
 
 def test_get_unique_genres(requests_mock):
@@ -57,3 +57,6 @@ def test_get_random_output(requests_mock):
     all_movies = mock_data['title'].unique().tolist()
     requests_mock.get(f'{BASE_URL}/unique_movies', json= {"genres":all_movies})
     assert {"genres": all_movies} == requests.get(f'{BASE_URL}/unique_movies').json()
+
+#def test_get_random_output(requests_mock):
+    #requests_mock.get(f'{BASE_URL}/user_model"', json= {"movie": [)
