@@ -32,8 +32,18 @@ BASE_URL = 'http://localhost:8000'
     #requests_mock.get(f'{BASE_URL}/', json= {"message": "API is up and running"})
     #resp = read_root()
     #assert resp == {"message": "API is up and running"}
-
+mock_data = pd.DataFrame([[1,3.5,1644,
+                           'Adventure|Animation|Children|Comedy|Fantasy','Toy Story (1995)']],
+                           index=['1'],
+                           columns=['movieId','rating','userId','genres','title'])
 
 def test_api_starting(requests_mock):
-    requests_mock.get('http://localhost:8000/', json= {"message": "API is up and running"})
-    assert {"message": "API is up and running"} == requests.get('http://localhost:8000/').json()
+    requests_mock.get(f'{BASE_URL}/', json= {"message": "API is up and running"})
+    assert {"message": "API is up and running"} == requests.get(f'{BASE_URL}/').json()
+
+
+def test_unique_genres(requests_mock):
+    all_genres = mock_data['genres'].str.split('|', expand=True).stack().tolist()
+    unique_genres = sorted(set(all_genres))
+    requests_mock.get(f'{BASE_URL}/unique_genres', json= {"genres": unique_genres })
+    assert {"genres": unique_genres} == requests.get(f'{BASE_URL}/unique_genres').json()
