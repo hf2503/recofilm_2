@@ -42,8 +42,18 @@ def test_api_starting(requests_mock):
     assert {"message": "API is up and running"} == requests.get(f'{BASE_URL}/').json()
 
 
-def test_unique_genres(requests_mock):
+def test_get_unique_genres(requests_mock):
     all_genres = mock_data['genres'].str.split('|', expand=True).stack().tolist()
     unique_genres = sorted(set(all_genres))
     requests_mock.get(f'{BASE_URL}/unique_genres', json= {"genres": unique_genres })
     assert {"genres": unique_genres} == requests.get(f'{BASE_URL}/unique_genres').json()
+
+def test_get_unique_movies(requests_mock):
+    all_movies = mock_data['title'].unique().tolist()
+    requests_mock.get(f'{BASE_URL}/unique_movies', json= {"genres":all_movies})
+    assert {"genres": all_movies} == requests.get(f'{BASE_URL}/unique_movies').json()
+
+def test_get_random_output(requests_mock):
+    all_movies = mock_data['title'].unique().tolist()
+    requests_mock.get(f'{BASE_URL}/unique_movies', json= {"genres":all_movies})
+    assert {"genres": all_movies} == requests.get(f'{BASE_URL}/unique_movies').json()
