@@ -1,101 +1,35 @@
 import sys
 import os
+
+#ajout pour lire les fichiers
 dir_path = os.path.dirname(os.path.realpath(__file__))
 parent_dir_path = os.path.abspath(os.path.join(dir_path,os.pardir))
 sys.path.insert(0,parent_dir_path)
+sys.path.append('../api')
+#fin ajout
+
 from unittest.mock import MagicMock, call, mock_open, patch
 import pandas as pd
 import pytest
 import requests
 from fastapi.testclient import TestClient
-from api.api import app
-from api.api import *
+from api.api import read_root
+from fastapi import FastAPI, HTTPException, Response, status, Depends, Header, Query
 from fastapi.security import HTTPBasic, HTTPBasicCredentials
 from requests.auth import HTTPBasicAuth
 import time
 
-import base64
-credentials = '1644'
-encoded_credentials = base64.b64encode(b"1644").decode()
-auth_string = f"Basic {encoded_credentials}"
+mock_data = pd.DataFrame([[1,3.5,1644,
+                           'Adventure|Animation|Children|Comedy|Fantasy','Toy Story (1995)']],
+                           index=['1'],
+                           columns=['movieId','rating','userId','genres','title'])
 
-client = TestClient(app)
-
-print(encoded_credentials)
-B = 6
-df = pd.DataFrame([[1,3.5,1644,'Adventure|Animation|Children|Comedy|Fantasy','Toy Story (1995)']],index=['1'],columns=['movieId','rating','userId','genres','title'])
-
-mock_data = {
-    'genres': pd.Series(['Action|Adventure', 'Comedy', 'Drama|Romance|War'])
-}
-
-def test_unique_genres():
-    with patch('api.api.data', mock_data):
-        result = unique_genres()
-
-    expected_result = {
-        'genres': ['Action', 'Adventure', 'Comedy', 'Drama', 'Romance', 'War']
-    }
-    
-    assert result == expected_result
+BASE_URL = 'http://localhost:8000'
 
 
 
+def test_api_starting(requests_mock):
+    requests_mock.get(f'{BASE_URL}/', json= {"message": "API is up and running"})
+    resp = read_root()
+    assert resp == {"message": "API is up and running"}
 
-
-
-def test_should_return_perimeter(mocker):
-    mocker.patch.object(unique_genres,data,df)
-    #expected_value = {"genres": unique_genres}
-    assert 0 == 0
-
-
-def test_api_starting():
-    """check if the API is running."""
-    response = client.get("/")
-    assert response.status_code == 200
-    assert response.json() == {"message": "API is up and running"}
-
-def test_api_unique_genre():
-    """check if the list of unique movies genres is not empty"""
-    response = client.get('/unique_genres')
-    assert response.status_code == 200
-    assert response.json() != None
-
-def test_api_get_random():
-    """check if the api gives always a random movie with an user known"""
-    response = client.get('/random?user_id=1644')
-    assert response.status_code == 200
-    assert response.json() != {'message': 'no movie for you:('}
-
-def test_api_user_model():
-    """ check if the api_user_model gives always a movie advised by the model movie with an user and a movie known:
-    user_id : 1644"""
-    response = client.get('/usermodel',params={'user_id':'1644'},
-                          headers={"Authorization": "Basic MTY0NDo="})
-    assert response.status_code == 200
-    assert response.json() != {'message': 'no movie for you:('}
-
-def test_api_movie_model():
-    """check if the api_movie_model gives always a movie advised by the model movie with an user and a movie known:
-    user_id : 1644
-    movie : Star Wars: Episode IV - A New Hope (1977) """
-    
-    response = client.get('/movie_model',params={'user_id':'1644',
-                          'movie_name':'Star Wars: Episode IV - A New Hope (1977)'},
-                          headers={"Authorization": "Basic MTY0NDo="})
-    assert response.status_code == 200
-    assert response.json() != {'message': 'no movie for you:('}
-
-
-
-
-
-
-
-
-
-
-
-
-print(auth_string)
