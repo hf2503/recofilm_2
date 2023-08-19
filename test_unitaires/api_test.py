@@ -13,7 +13,7 @@ import pandas as pd
 import pytest
 import requests
 from fastapi.testclient import TestClient
-from api.api import read_root,unique_genres,unique_movies
+from api.api import read_root,unique_genres,unique_movies,get_data
 from fastapi import FastAPI, HTTPException, Response, status, Depends, Header, Query
 from fastapi.security import HTTPBasic, HTTPBasicCredentials
 from requests.auth import HTTPBasicAuth
