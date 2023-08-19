@@ -57,8 +57,10 @@ def test_get_unique_movies(requests_mock):
     assert result == requests.get(f'{BASE_URL}/unique_movies').json()
 
 #def test_get_random_output(requests_mock):
-    #requests_mock.get(f'{BASE_URL}/unique_movies',json= {"genres":all_movies})
+    #requests_mock.get(f'{BASE_URL}/random',#headers={autehtifi},json= {"genres":all_movies})
     #assert {"genres": all_movies} == requests.get(f'{BASE_URL}/unique_movies').json()
 
 #def test_get_random_output(requests_mock):
     #requests_mock.get(f'{BASE_URL}/user_model"', json= {"movie": [)
+
+requests.get()
