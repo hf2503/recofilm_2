@@ -30,14 +30,23 @@ def test_api_starting():
     assert response.json() == {"message": "API is up and running"}
 
 def test_unique_genres():
-    """check if the list of unique movies genres is not empty"""
+    """test if the list of unique movies genres is not empty"""
     response = client.get("/unique_genres")
     assert response.status_code == 200
     assert response.json() != None
 
+def test_unique_movies():
+    """test if the list of unique movies genres is not empty"""
+    response = client.get("/unique_movies")
+    assert response.status_code == 200
+    assert response.json() != None
 
 
-
+def test_random_output():
+    """check if the api gives always a random movie with an user known"""
+    response = client.get("/unique_genres",params={'user_id':'1644'})
+    assert response.status_code == 200
+    assert response.json() != {'message': 'no movie for you:('}
 
 
 
