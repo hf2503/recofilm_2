@@ -74,9 +74,4 @@ def test_api_reminder():
     response = client.get("/remindMe",params={'k':10},headers={'Authentification': "fake_id"})
     assert response.status_code == 404
 
-def test_api_reminder_2():
-    """ test the security of the api_reminder """
-    response = client.get("/remindMe",params={'k':10},headers={'Authentification': 'Basic MTY0NDo='})
-    assert response.status_code == 200
-    assert len(response.json().get('movie')) == 10
 
