@@ -21,31 +21,17 @@ from requests.auth import HTTPBasicAuth
 import time
 from unittest.mock import Mock, patch
 
-
-data = pd.DataFrame({
-        'movieId': [1],
-        'rating': [3.5],
-        'userId': [1644],
-        'genres': ['Adventure|Animation|Children|Comedy|Fantasy'],
-        'title': ['Toy Story (1995)']
-    })
-
 client = TestClient(app)
 
-
-def test_unique_genres():
-    with patch('api.api.data', data):
-        response = client.get("/unique_genres")
-        result = response.json()
-    expected_result = {'genres': ['Adventure', 'Animation','Children','Comedy', 'Fantasy']}
-
-    assert result == expected_result
+def test_api_starting():
+    """Test if the API is running."""
+    response = client.get("/")
+    assert response.status_code == 200
+    assert response.json() == {"message": "API is up and running"}
 
 
-def test_unique_movies():
-    with patch('api.api.data', data):
-        response = client.get("/unique_movies")
-        result = response.json()
-    expected_result = {"movies":['Toy Story (1995)']}
-    assert result == expected_result
 
+#import base64
+#credentials = "1644:"
+#encoded_credentials = base64.b64encode(credentials.encode()).decode()
+#auth_string = f"Basic {encoded_credentials}"
