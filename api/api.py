@@ -15,11 +15,8 @@ if os.getenv("GITHUB_ACTION") is None:
     data, movie_data, user_data, title_dict = get_data()
     GenreEnum = get_GenreEnum(data)
 else:
-    data = pd.read_csv(DATA_PATH)
-    movie_data = None
-    user_data = None
-    title_dict = None
-    GenreEnum = None
+    data, movie_data, user_data, title_dict = get_data()
+    GenreEnum = get_GenreEnum(data)
 
 
 def get_next_new_userid():
