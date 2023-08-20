@@ -25,6 +25,7 @@ jobs:
         pip install urllib3==1.26.6
         pip install uvicorn==0.22.0
         pip install pytest
+        pip install requests-mock[fixture]
         pip install joblib
         pip install scipy
         pip install requests
