@@ -29,6 +29,19 @@ def test_api_starting():
     assert response.status_code == 200
     assert response.json() == {"message": "API is up and running"}
 
+def test_unique_genres():
+    """check if the list of unique movies genres is not empty"""
+    response = client.get("/unique_genres")
+    assert response.status_code == 200
+    assert response.json() != None
+
+
+
+
+
+
+
+
 
 
 #import base64
