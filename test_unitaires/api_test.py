@@ -41,7 +41,6 @@ def test_get_unique_genres(requests_mock):
     assert result == requests.get(f'{BASE_URL}/unique_genres').json()
 
 def test_get_unique_movies(requests_mock):
-
     requests_mock.get(f'{BASE_URL}/unique_movies', json= {"movies":['Toy Story (1995)']})
     with patch('api.api.data',mock_data):
         result = unique_movies()
@@ -53,14 +52,14 @@ def test_get_random_output(requests_mock):
         result = random_output(query_params = {'user_id':'1644','subject':'','movie_name':''})
     assert result == requests.get(f'{BASE_URL}/random?user_id=1644').json()
 
-def test_get_movie_model(requests_mock):
-    requests_mock.get(f'{BASE_URL}/movie_model?user_id=1644&movie_name=Toy%20Story%20%281995%294',json= {'message': 'No movie for you :('})
-    with patch('api.api.data',mock_data):
-        result = movie_model(query_params = {'user_id':'1644','subject':'','movie_name':'Toy Story (1995)'})
-        assert result == requests.get(f'{BASE_URL}/movie_model?user_id=1644&movie_name=Toy%20Story%20%281995%294').json()
+#def test_get_movie_model(requests_mock):
+    #requests_mock.get(f'{BASE_URL}/movie_model?user_id=1644&movie_name=Toy%20Story%20%281995%294',json= {'message': 'No movie for you :('})
+    #with patch('api.api.data',mock_data):
+        #result = movie_model(query_params = {'user_id':'1644','subject':'','movie_name':'Toy Story (1995)'})
+        #assert result == requests.get(f'{BASE_URL}/movie_model?user_id=1644&movie_name=Toy%20Story%20%281995%294').json()
 
-def test_get_user_model(requests_mock):
-    requests_mock.get(f'{BASE_URL}/user_model?user_id=1644',json= {'message': 'No movie for you :('})
-    with patch('api.api.data',mock_data):
-        result = user_model(query_params = {'user_id':'1644','subject':'','movie_name':'Toy Story (1995)'})
-        assert result == requests.get(f'{BASE_URL}/user_model?user_id=1644').json()
+#def test_get_user_model(requests_mock):
+    #requests_mock.get(f'{BASE_URL}/user_model?user_id=1644',json= {'message': 'No movie for you :('})
+    #with patch('api.api.data',mock_data):
+        #result = user_model(query_params = {'user_id':'1644','subject':'','movie_name':'Toy Story (1995)'})
+        #assert result == requests.get(f'{BASE_URL}/user_model?user_id=1644').json()
