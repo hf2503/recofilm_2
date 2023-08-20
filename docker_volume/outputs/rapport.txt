@@ -184,3 +184,72 @@ movieId       19545
 tag           38643
 timestamp    425373
 dtype: int64
+****** Information for File: /code/preprocessing_job/docker_volume/inputs/ratings.csv ******
+****** Stat desc ******
+             userId       movieId        rating     timestamp
+count  2.000026e+07  2.000026e+07  2.000026e+07  2.000026e+07
+mean   6.904587e+04  9.041567e+03  3.525529e+00  1.100918e+09
+std    4.003863e+04  1.978948e+04  1.051989e+00  1.621694e+08
+min    1.000000e+00  1.000000e+00  5.000000e-01  7.896520e+08
+25%    3.439500e+04  9.020000e+02  3.000000e+00  9.667977e+08
+50%    6.914100e+04  2.167000e+03  3.500000e+00  1.103556e+09
+75%    1.036370e+05  4.770000e+03  4.000000e+00  1.225642e+09
+max    1.384930e+05  1.312620e+05  5.000000e+00  1.427784e+09
+****** Correlation ******
+             userId   movieId    rating  timestamp
+userId     1.000000 -0.000850  0.001175  -0.003101
+movieId   -0.000850  1.000000  0.002606   0.459096
+rating     0.001175  0.002606  1.000000  -0.000512
+timestamp -0.003101  0.459096 -0.000512   1.000000
+****** NA ******
+userId       0.0
+movieId      0.0
+rating       0.0
+timestamp    0.0
+dtype: float64
+****** Null ******
+userId       0.0
+movieId      0.0
+rating       0.0
+timestamp    0.0
+dtype: float64
+****** Valeurs uniques ******
+userId         138493
+movieId         26744
+rating             10
+timestamp    15351121
+dtype: int64
+****** Information for File: /code/preprocessing_job/docker_volume/inputs/tags.csv ******
+****** Stat desc ******
+              userId        movieId     timestamp
+count  465564.000000  465564.000000  4.655640e+05
+mean    68712.354263   32627.762920  1.298711e+09
+std     41877.674053   36080.241157  7.920891e+07
+min        18.000000       1.000000  1.135429e+09
+25%     28780.000000    2571.000000  1.245007e+09
+50%     70201.000000    7373.000000  1.302291e+09
+75%    107322.000000   62235.000000  1.366218e+09
+max    138472.000000  131258.000000  1.427771e+09
+****** Correlation ******
+             userId   movieId  timestamp
+userId     1.000000 -0.006086   0.024629
+movieId   -0.006086  1.000000   0.359415
+timestamp  0.024629  0.359415   1.000000
+****** NA ******
+userId       0.000000
+movieId      0.000000
+tag          0.003437
+timestamp    0.000000
+dtype: float64
+****** Null ******
+userId       0.000000
+movieId      0.000000
+tag          0.003437
+timestamp    0.000000
+dtype: float64
+****** Valeurs uniques ******
+userId         7801
+movieId       19545
+tag           38643
+timestamp    425373
+dtype: int64
