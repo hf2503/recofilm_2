@@ -51,19 +51,19 @@ def test_unique_movies():
 
 
 def test_random_output():
-    """check if random_output gives always a random movie with an user known"""
+    """test if random_output gives always a random movie with an user known"""
     response = client.get("/unique_genres",params={'user_id':'1644'})
     assert response.status_code == 200
     assert response.json() != {'message': 'no movie for you:('}
 
 def test_get_movie_model():
-    """check if the movie_model gives always a movie advised by the model movie with an user and a movie known"""
+    """test if the movie_model gives always a movie advised by the model movie with an user and a movie known"""
     response = client.get("/movie_model",params={'user_id':1644,'movie_name':'Star Wars: Episode IV - A New Hope (1977)'})
     assert response.status_code == 200
     assert response.json() != {'message': 'no movie for you:('}
 
 def test_get_user_model():
-    """ check if the user_model gives always a movie advised by the model movie with an user known"""
+    """ test if the user_model gives always a movie advised by the model movie with an user known"""
     response = client.get("/user_model",params={'user_id':1644})
     assert response.status_code == 200
     assert response.json() != {'message': 'no movie for you:('}
