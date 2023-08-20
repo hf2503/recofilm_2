@@ -14,6 +14,7 @@ import requests
 from fastapi import Depends
 from fastapi.testclient import TestClient
 import importlib
+import base64
 
 # Reload the api module to ensure the patch takes effect
 from api.api import app
@@ -22,6 +23,13 @@ import time
 from unittest.mock import Mock, patch
 
 client = TestClient(app)
+
+
+credentials = "1644:"
+encoded_credentials = base64.b64encode(credentials.encode()).decode()
+print(encoded_credentials)
+auth_string = f"Basic {encoded_credentials}"
+print(auth_string)
 
 def test_api_starting():
     """Test if the API is running."""
@@ -43,17 +51,32 @@ def test_unique_movies():
 
 
 def test_random_output():
-    """check if the api gives always a random movie with an user known"""
+    """check if random_output gives always a random movie with an user known"""
     response = client.get("/unique_genres",params={'user_id':'1644'})
     assert response.status_code == 200
     assert response.json() != {'message': 'no movie for you:('}
 
+def test_get_movie_model():
+    """check if the movie_model gives always a movie advised by the model movie with an user and a movie known"""
+    response = client.get("/movie_model",params={'user_id':1644,'movie_name':'Star Wars: Episode IV - A New Hope (1977)'})
+    assert response.status_code == 200
+    assert response.json() != {'message': 'no movie for you:('}
+
+def test_get_user_model():
+    """ check if the user_model gives always a movie advised by the model movie with an user known"""
+    response = client.get("/user_model",params={'user_id':1644})
+    assert response.status_code == 200
+    assert response.json() != {'message': 'no movie for you:('}
 
 
+def test_api_reminder():
+    """ test the security of the api_reminder """
+    response = client.get("/remindMe",params={'k':10},headers={'Authentification': "fake_id"})
+    assert response.status_code == 404
 
+def test_api_reminder_2():
+    """ test the security of the api_reminder """
+    response = client.get("/remindMe",params={'k':10},headers={'Authentification': 'Basic MTY0NDo='})
+    assert response.status_code == 200
+    assert len(response.json().get('movie')) == 10
 
-
-#import base64
-#credentials = "1644:"
-#encoded_credentials = base64.b64encode(credentials.encode()).decode()
-#auth_string = f"Basic {encoded_credentials}"
