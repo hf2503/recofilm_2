@@ -45,6 +45,14 @@ mock_data,mock_movie_data,mock_user_data,mock_title_dict_data = get_data_mock()
 
 client = TestClient(app)
 
+def test_response_time():
+    start_time = time.time()
+    response = client.get("/")
+    elapsed_time = time.time() - start_time
+    assert response.status_code == 200
+    assert elapsed_time < 1
+
+
 def test_api_starting():
     """Test if the API is running."""
     response = client.get("/")
@@ -79,5 +87,6 @@ def test_api_reminder():
     """ test the security of the api_reminder """
     response = client.get("/remindMe",params={'k':10},headers={"Authorization": "fake"})
     assert response.status_code == 404
+
 
 
