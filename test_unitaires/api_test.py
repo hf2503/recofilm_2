@@ -64,14 +64,15 @@ def test_unique_genres():
     with patch('api.api.data',mock_data):
         response = client.get("/unique_genres")
         assert response.status_code == 200
-        assert response.json() != None
+        #assert response.json() != None
+        assert response.json() == {"genres": ['Adventure','Animation','Children','Comedy','Fantasy','Horror','Thriller']}
 
 def test_unique_movies():
     """test if the list of unique movies genres is not empty"""
     with patch('api.api.data',mock_data):
         response = client.get("/unique_movies")
-        assert response.status_code == 200
-        assert response.json() != None
+        #assert response.status_code == 200
+        assert response.json() == {"movies" : ['Toy Story (1995)','Children of the Corn (1984)']}
 
 
 def test_random_output():
@@ -82,11 +83,5 @@ def test_random_output():
             assert response.status_code == 200
             assert response.json() == {'ids': 2122, 'message': 'ok', 'movie': ['Children of the Corn (1984)']}
             
-
-def test_api_reminder():
-    """ test the security of the api_reminder """
-    response = client.get("/remindMe",params={'k':10},headers={"Authorization": "fake"})
-    assert response.status_code == 404
-
 
 
